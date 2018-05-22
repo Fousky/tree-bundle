@@ -1,0 +1,31 @@
+{
+    "name": "fousky/tree-bundle",
+    "type": "symfony-bundle",
+    "description": "This Symfony bundle integrates jsTree and Gedmo Nested Set directly to Sonata Admin",
+    "homepage": "https://github.com/Fousky/tree-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Lukáš Brzák",
+            "email": "lukas.brzak@fousky.cz"
+    	}
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=7.0.8",
+        "doctrine/orm": "^2.5",
+        "sonata-project/admin-bundle": "^3.1",
+        "stof/doctrine-extensions-bundle": "^1.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Fousky\\TreeBundle\\": ""
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "platform": {
+            "php": "7.0.8"
+        }
+    }
+}

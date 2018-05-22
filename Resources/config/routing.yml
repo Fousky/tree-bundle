@@ -1,0 +1,4 @@
+fousky_tree_data:
+    path:     /tree/data
+    defaults:
+        _controller: FouskyTreeBundle:TreeAdmin:treeData
