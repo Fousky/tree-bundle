@@ -1,0 +1,13 @@
+services:
+    fousky_app.admin.menu_item:
+        class: Fousky\AppBundle\Admin\Menu\MenuItemAdmin
+        arguments: [~, Fousky\AppBundle\Entity\Menu\MenuItem, FouskyTreeBundle:TreeAdmin, 'title']
+        tags:
+            -
+              name: sonata.admin
+              manager_type: orm
+              label: 'menu.title'
+              group: 'app.backend.menu.group.content'
+              icon: '<i class="fa fa-th-large" aria-hidden="true"></i>'
+              label_translator_strategy: sonata.admin.label.strategy.underscore
+              persist_filters: true

@@ -1,0 +1,28 @@
+parameters:
+    fousky.menu.cache_dir: '%kernel.cache_dir%/nette'
+    fousky.menu.journal: '%fousky.menu.cache_dir%/journal.sqlite'
+
+services:
+    fousky.menu.cache.default:
+        alias: fousky.menu.cache.nette
+
+    fousky.menu.cache.nette:
+        public: false
+        class: Fousky\AppBundle\Model\Menu\Cache\MenuNetteCache
+        arguments: ['%fousky.menu.cache_dir%', '%fousky.menu.journal%']
+
+    fousky.menu.factory:
+        class: Fousky\AppBundle\Model\Menu\MenuItemFactory
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - '@request_stack'
+            - '@router'
+            - '@fousky.menu.cache.nette'
+
+    fousky.menu.cache.listener:
+        class: Fousky\AppBundle\EventListener\Menu\MenuCacheListener
+        arguments:
+            - '@fousky.menu.cache.default'
+            - '@fousky.menu.factory'
+        tags:
+            - { name: doctrine.event_subscriber }

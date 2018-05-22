@@ -1,0 +1,247 @@
+
+{# @var menu \Fousky\AppBundle\Model\Menu\Details\MenuDetails #}
+<div class="pull-left search-focus-fade" id="slidemenu">
+    <div class="slidemenu-close visible-xs">✕</div>
+    <ul class="nav navbar-nav">
+
+    {% for item in menu.children %}
+
+        {# @todo: je třeba nastylovat aktivní menu! #}
+        <li{% if item.current %} class="active"{% endif %}>
+            <a{% if item.type != 'void' %} href="{{ item.uri }}"{% endif %} title="{{ item.title }}">
+                <span class="link-name">{{ item.title }}</span>
+                {% if item.children|length > 0 %}
+                <span class="caret caret--down"></span>
+                {% endif %}
+            </a>
+            {% if item.children|length > 0 %}
+            <ul class="dropdown-menu animated fadeIn" role="menu">
+            {% for child in item.children %}
+                {# @var child \Fousky\AppBundle\Entity\Menu\MenuItem #}
+                {% if child.type == 'separator' %}
+                    <li><hr /></li>
+                {% else %}
+                    <li{% if child.current %} class="active"{% endif %}>
+                        <a{% if child.type != 'void' %} href="{{ child.uri }}"{% endif %} title="{{ child.title }}">{{ child.title }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+            </ul>
+            {% endif %}
+        </li>
+    {% endfor %}
+
+        {#
+        <li>
+            <a href="{{ path('_fousky_homepage') }}" title="Přejít na hlavní stranu">
+                <span class="link-name">Domů</span>
+            </a>
+        </li>
+        <li>
+            <a href="index.html" class="dropdown-toggle">
+                <span class="link-name">Informace</span>
+                <span class="caret caret--down"></span>
+            </a>
+            <ul class="dropdown-menu animated fadeIn" role="menu">
+                <li><a href="#">Fousky - kdo jsme?</a></li>
+                <li><a href="#">Vize, proč to děláme</a></li>
+                <li><a href="#">Lidé ve spolku</a></li>
+                <li><a href="#">Naše projekty</a></li>
+                <li><a href="#">Jak se stát členem?</a></li>
+                <li><a href="#">Jak mohu pomoci?</a></li>
+                <li><a href="#">Výroční zprávy</a></li>
+                <li><a href="#">Novinky - kočičí zpravodaj</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="blog.html"  class="dropdown-toggle">
+                <span class="link-name">Katalog koček</span>
+                <span class="caret caret--down"></span>
+            </a>
+            <ul class="dropdown-menu animated fadeIn" role="menu">
+                <li><a href="#">URGENTNÍ PŘÍPADY</a></li>
+                <li><a href="#">Hledají domov</a></li>
+                <li><a href="#">Čekárna</a></li>
+                <li><a href="#">Karanténa</a></li>
+                <li><a href="#">Fronta na příjem</a></li>
+                <li><a href="#">Našli domov</a></li>
+                <li><hr /></li>
+                <li><a href="#">Pomáháme ostatním</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#" class="dropdown-toggle">
+                <span class="link-name">Aukce</span>
+                <span class="caret caret--down"></span>
+            </a>
+            <ul class="dropdown-menu animated fadeIn" role="menu">
+                <li><a href="#">Probíhající aukce</a></li>
+                <li><a href="#">Ukončené aukce</a></li>
+                <li><a href="#">Vytvořit novou aukci</a></li>
+                <li><hr /></li>
+                <li><a href="#">Jak to funguje?</a></li>
+                <li><a href="#">Jak věnovat zboží do aukce?</a></li>
+            </ul>
+        </li>
+        #}
+        {#
+        <li class="menu-large">
+            <a href="listing.html" class="dropdown-toggle">
+                <span class="link-name">CATEGORY</span>
+                <span class="caret caret--dots"></span>
+            </a>
+            <div class="dropdown-menu megamenu animated fadeIn">
+                <div class="container">
+                    <ul class="megamenu__columns">
+                        <li class="megamenu__columns__top-block text-uppercase">
+                            <ul>
+                                <li><span class="icon icon-box icon--lg"></span><a href="#">GIFTS EXCLUSIVE</a></li>
+                                <li><span class="icon icon-sales-alt icon--lg"></span><a href="#">OFFERS</a></li>
+                            </ul>
+                        </li>
+                        <li class="level-menu level1">
+                            <ul>
+                                <li class="title"><a href="listing.html">Coats</a></li>
+                                <li class="level2"><a href="listing.html">Club Dresses</a>
+                                    <ul class="level-menu__dropdown">
+                                        <li class="level3"><a href="listing.html">Empty subcategory #1</a>
+                                            <ul class="level-menu__dropdown">
+                                                <li class="level3"><a href="listing.html">Empty subcategory #1-1</a></li>
+                                                <li class="level3"><a href="listing.html">Empty subcategory #1-2</a></li>
+                                                <li class="level3"><a href="listing.html">Empty subcategory #1-3</a></li>
+                                                <li class="level3"><a href="listing.html">Empty subcategory #1-4</a></li>
+                                                <li class="level3"><a href="listing.html">Empty subcategory #1-5</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="level3"><a href="listing.html">Empty subcategory #2</a></li>
+                                        <li class="level3"><a href="listing.html">Empty subcategory #3</a></li>
+                                    </ul>
+                                </li>
+                                <li class="level2"><a href="listing.html">Evening Dresses</a></li>
+                                <li class="level2"><a href="listing.html">Prom Dresses</a></li>
+                            </ul>
+                        </li>
+                        <li class="level-menu level1">
+                            <ul>
+                                <li class="title"><a href="listing.html">Dresses</a><span class="badge badge--squared">NEW</span></li>
+                                <li class="level2"><a href="listing.html">Empty category #1</a></li>
+                                <li class="level2"><a href="listing.html">Empty category #2</a></li>
+                                <li class="level2"><a href="listing.html">Empty category #3</a></li>
+                            </ul>
+                        </li>
+                        <li class="level-menu level1">
+                            <ul>
+                                <li class="title"><a href="listing.html">Jackets</a></li>
+                                <li class="level2"><a href="listing.html">Empty category #4</a></li>
+                                <li class="level2"><a href="listing.html">Empty category #5</a></li>
+                                <li class="level2"><a href="listing.html">Empty category #6</a></li>
+                            </ul>
+                        </li>
+                        <li class="level-menu level1">
+                            <ul>
+                                <li class="title"><a href="listing.html">Jeans</a></li>
+                                <li class="level2"><a href="listing.html">Empty category #7</a></li>
+                                <li class="level2"><a href="listing.html">Empty category #8</a></li>
+                                <li class="level2"><a href="listing.html">Empty category #9</a></li>
+                            </ul>
+                        </li>
+                        <li class="level-menu level1">
+                            <ul>
+                                <li class="title"><a href="listing.html">Jumpsuits</a></li>
+                                <li class="level2"><a href="listing.html">Empty category #10</a></li>
+                                <li class="level2"><a href="listing.html">Empty category #11</a></li>
+                                <li class="level2"><a href="listing.html">Empty category #12</a></li>
+                            </ul>
+                        </li>
+                        <li class="level-menu level1">
+                            <ul>
+                                <li class="title"><a href="listing.html">Lingerie</a></li>
+                                <li class="level2"><a href="listing.html">Empty category #13</a></li>
+                                <li class="level2"><a href="listing.html">Empty category #14</a></li>
+                            </ul>
+                        </li>
+                        <li class="level-menu level1">
+                            <ul>
+                                <li class="title"><a href="listing.html">Pants</a><span class="badge badge--squared badge--color-alt">-10%</span></li>
+                                <li class="level2"><a href="listing.html">Empty category #15</a></li>
+                                <li class="level2"><a href="listing.html">Empty category #16</a></li>
+                                <li class="level2"><a href="listing.html">Empty category #17</a></li>
+                            </ul>
+                        </li>
+                        <li class="level-menu level1">
+                            <ul>
+                                <li class="title"><a href="listing.html">Shorts</a></li>
+                                <li class="level2"><a href="listing.html">Empty category #18</a></li>
+                                <li class="level2"><a href="listing.html">Empty category #19</a></li>
+                                <li class="level2"><a href="listing.html">Empty category #20</a></li>
+                            </ul>
+                        </li>
+                        <li class="level-menu level1">
+                            <ul>
+                                <li class="title"><a href="listing.html">Skirts</a></li>
+                                <li class="level2"><a href="listing.html">Empty category #21</a></li>
+                                <li class="level2"><a href="listing.html">Empty category #22</a></li>
+                            </ul>
+                        </li>
+                        <li class="level-menu level1">
+                            <ul>
+                                <li class="title"><a href="listing.html">Sweaters</a></li>
+                            </ul>
+                        </li>
+                        <li class="level-menu level1">
+                            <ul>
+                                <li class="title"><a href="listing.html">Tops</a></li>
+                            </ul>
+                        </li>
+                        <li class="megamenu__columns__bottom-block text-uppercase">
+                            <ul>
+                                <li><span class="icon icon-bag icon--lg"></span><a href="#">SPECIAL OFFER</a></li>
+                                <li><span class="icon icon-shop-label icon--lg"></span><a href="#">UP TO 50% OFF DISCOUNTS</a></li>
+                            </ul>
+                        </li>
+                        <li class="megamenu__columns__side-image"><img src="/templates/images/img-megamenu.jpg" alt="Megamenu Image"> </li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+        #}
+
+        {#
+        <li>
+            <a href="#" class="dropdown-toggle">
+                <span class="link-name">Rady</span>
+                <span class="caret caret--dots"></span>
+            </a>
+            <ul class="dropdown-menu animated fadeIn" role="menu">
+                <li><a href="#">Jak vybrat kočičku?</a></li>
+                <li><a href="#">Mohu přijít na návštěvu?</a></li>
+                <li><a href="#">Jak mohu pomoci?</a></li>
+                <li><a href="#">Jak se k nám připojit?</a></li>
+                <li><a href="#">Jak mít vlastní depozitum?</a></li>
+                <li><a href="#">Jak věnovat zboží do aukce?</a></li>
+                <li><a href="#">Jak se s námi setkat?</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#"></a>
+        </li>
+        #}
+        {#
+        <li>
+            <a href="about.html" class="dropdown-toggle">
+                <span  class="link-name">Pages</span>
+                <span class="badge badge--menu">!</span>
+                <span class="caret caret--dots"></span>
+            </a>
+            <ul class="dropdown-menu animated fadeIn" role="menu">
+                <li><a href="about.html">About</a></li>
+                <li><a href="typography.html">Typography</a></li>
+                <li><a href="sitemap.html">Sitemap</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="create-account.html">Create Account</a></li>
+                <li><a href="logination.html">Logination</a></li>
+            </ul>
+        </li>
+        #}
+    </ul>
+</div>
